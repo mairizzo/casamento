@@ -20,6 +20,26 @@ async function loadImageLinks() {
     }
 }
 
+// Função para normalizar nomes de arquivos (remover acentos e caracteres especiais)
+function normalizeFileName(filename) {
+    return filename
+        .normalize('NFD') // Decompor caracteres acentuados
+        .replace(/[\u0300-\u036f]/g, '') // Remover diacríticos
+        .replace(/[^a-zA-Z0-9\s.\-()]/g, ' ') // Remover caracteres especiais, manter espaço, ponto, hífen
+        .replace(/\s+/g, ' ') // Remover múltiplos espaços
+        .trim();
+}
+
+// Função para obter nome de arquivo normalizado de um caminho
+function getNormalizedImagePath(imagePath) {
+    // Extrai o nome do arquivo do caminho
+    const fileName = imagePath.split('/').pop();
+    // Normaliza o nome do arquivo
+    const normalizedName = normalizeFileName(fileName);
+    // Retorna o caminho com nome normalizado
+    return `imagens_unidas/${normalizedName}`;
+}
+
 // Função para encontrar a imagem correta para uma URL
 function findImageForUrl(url) {
     // Normaliza a URL para buscar correspondência
@@ -29,7 +49,9 @@ function findImageForUrl(url) {
     for (const [imageName, imageUrl] of Object.entries(imageLinksMap)) {
         if (imageUrl === url) {
             // Encontrou correspondência exata - retorna o caminho da imagem
-            return `imagens_unidas/${imageName}`;
+            // Usa nome de arquivo normalizado (sem acentos)
+            const normalizedImageName = normalizeFileName(imageName);
+            return `imagens_unidas/${normalizedImageName}`;
         }
     }
     
@@ -44,7 +66,9 @@ function findImageForUrl(url) {
     // Verifica mapeamentos especiais
     for (const [pattern, imageName] of Object.entries(specialMappings)) {
         if (normalizedUrl.includes(pattern.toLowerCase())) {
-            return `imagens_unidas/${imageName}`;
+            // Usa nome de arquivo normalizado (sem acentos)
+            const normalizedImageName = normalizeFileName(imageName);
+            return `imagens_unidas/${normalizedImageName}`;
         }
     }
     
@@ -63,7 +87,8 @@ function findImageForUrl(url) {
     
     // Procura pela melhor correspondência nos nomes das imagens
     for (const imageName of Object.keys(imageLinksMap)) {
-        const normalizedImageName = imageName.toLowerCase();
+        // Normaliza o nome da imagem para comparação (remove acentos)
+        const normalizedImageName = normalizeFileName(imageName).toLowerCase();
         let score = 0;
         
         // Verifica cada palavra-chave
@@ -81,7 +106,9 @@ function findImageForUrl(url) {
     
     // Se encontrou uma correspondência razoável, usa-a
     if (bestScore > 5 && bestMatch) {
-        return `imagens_unidas/${bestMatch}`;
+        // Usa nome de arquivo normalizado (sem acentos)
+        const normalizedImageName = normalizeFileName(bestMatch);
+        return `imagens_unidas/${normalizedImageName}`;
     }
     
     // Fallback: placeholder
