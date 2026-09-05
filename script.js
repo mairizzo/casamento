@@ -368,19 +368,7 @@ function updateStats() {
 
 // Função para atualizar filtros ativos
 function updateActiveFilters() {
-    // Atualizar badges de preço
-    document.querySelectorAll('.price-badge').forEach(badge => {
-        const range = badge.getAttribute('data-range');
-        badge.classList.remove('active');
-        
-        if (range === selectedPriceRange || 
-            (selectedPriceRange === 'all' && range === 'all') ||
-            (selectedPriceRange === range)) {
-            badge.classList.add('active');
-        }
-    });
-    
-    // Atualizar radio buttons
+    // Atualizar radio buttons no sidebar
     document.querySelectorAll('input[name="priceFilter"]').forEach(radio => {
         radio.checked = radio.value === selectedPriceRange;
     });
@@ -390,13 +378,9 @@ function updateActiveFilters() {
 function handleGiftClick(product) {
     currentProduct = product;
     
-    // Mostrar modal de voltagem se for eletroeletrônico
-    if (product.isElectroElectronic) {
-        showVoltageModal();
-    } else {
-        // Se não for eletroeletrônico, ir direto para o checkout
-        proceedToCheckout();
-    }
+    // Sempre mostrar modal de confirmação antes de ir para o checkout
+    // (mesmo para produtos não eletrônicos, é bom o convidado revisar)
+    showVoltageModal();
 }
 
 // Função para mostrar modal de voltagem
@@ -430,14 +414,6 @@ function proceedToCheckout() {
 
 // Função para inicializar eventos
 function initializeEvents() {
-    // Eventos dos badges de preço
-    document.querySelectorAll('.price-badge').forEach(badge => {
-        badge.addEventListener('click', () => {
-            const range = badge.getAttribute('data-range');
-            filterProductsByPrice(range);
-        });
-    });
-    
     // Eventos dos radio buttons de filtro
     document.querySelectorAll('input[name="priceFilter"]').forEach(radio => {
         radio.addEventListener('change', (e) => {

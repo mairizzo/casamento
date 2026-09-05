@@ -7,14 +7,23 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Italiana&family=Allura&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Header / Hero Section -->
     <header class="hero">
         <div class="hero-content">
-            <h1 class="couple-names">João <span class="amp">&</span> Maisa</h1>
+            <div class="couple-names-container">
+                <div class="decorative-line left"></div>
+                <h1 class="couple-names">
+                    <span class="name">João</span>
+                    <span class="amp">&</span>
+                    <span class="name">Maisa</span>
+                </h1>
+                <div class="decorative-line right"></div>
+            </div>
+            <p class="wedding-date">Construindo nosso lar juntos</p>
             
             <div class="welcome-message">
                 <h2>Escolha seu presente especial para o nosso lar!</h2>
@@ -30,26 +39,8 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="hero-instructions">
-                <p>Escolha um presente, faça sua contribuição e ajude-nos a construir nosso lar dos sonhos!</p>
-            </div>
         </div>
     </header>
-
-    <!-- Price Range Navigation -->
-    <section class="price-navigation">
-        <div class="container">
-            <h3 class="section-title">Escolha por faixa de preço</h3>
-            <div class="price-badges">
-                <div class="price-badge" data-range="0-100">Até R$ 100</div>
-                <div class="price-badge" data-range="101-300">R$ 101 - R$ 300</div>
-                <div class="price-badge" data-range="301-500">R$ 301 - R$ 500</div>
-                <div class="price-badge" data-range="501-1000">R$ 501 - R$ 1.000</div>
-                <div class="price-badge" data-range="1001-2000">Acima de R$ 1.000</div>
-            </div>
-        </div>
-    </section>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -130,19 +121,20 @@
             </div>
             <div class="modal-body">
                 <div class="warning-icon">
-                    <i class="fas fa-plug"></i>
+                    <i class="fas fa-gift"></i>
                 </div>
                 <p class="warning-text">
-                    Caso o presente escolhido seja um equipamento eletrônico ou eletrodoméstico, 
-                    <strong>certifique-se de que a voltagem é 110V</strong>!
+                    <strong>Antes de prosseguir, verifique os detalhes do presente!</strong>
                 </p>
-                <p class="modal-info">
-                    Nossa residência funciona com voltagem 110V. Verifique esta informação antes de prosseguir.
+                <p class="modal-info" id="modalInfoText">
+                    Se o presente escolhido for um equipamento eletrônico ou eletrodoméstico, 
+                    <strong>certifique-se de que a voltagem é 110V</strong>!<br><br>
+                    Nossa residência funciona com voltagem 110V.
                 </p>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" id="cancelBtn">Cancelar</button>
-                <button class="btn btn-primary" id="understandBtn">Entendido</button>
+                <button class="btn btn-primary" id="understandBtn">Entendido, Prosseguir</button>
             </div>
         </div>
     </div>
@@ -171,7 +163,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Lista de Presentes - João e Maisa. Todos os direitos reservados.</p>
+                <p>&copy; 2026 Lista de Presentes - João e Maisa. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
