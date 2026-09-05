@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Presente - João e Maisa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="checkout.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="checkout-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Voltar para lista
+                </a>
+                <h1 class="couple-names">João <span class="amp">&</span> Maisa</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="checkout-main">
+        <div class="container">
+            <div class="checkout-wrapper">
+                <!-- Product Summary -->
+                <section class="product-summary" id="productSummary">
+                    <div class="summary-header">
+                        <h2><i class="fas fa-gift"></i> Resumo do Presente</h2>
+                    </div>
+                    <div class="summary-content">
+                        <div class="product-image-container">
+                            <div class="product-image-large" id="productImage"></div>
+                        </div>
+                        <div class="product-details">
+                            <h3 id="productName">Carregando...</h3>
+                            <div class="product-price-large" id="productPrice">R$ 0,00</div>
+                            <div class="voltage-warning" id="voltageWarning">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span>Verifique se a voltagem é 110V antes de comprar</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Checkout Options -->
+                <section class="checkout-options">
+                    <div class="options-header">
+                        <h2><i class="fas fa-credit-card"></i> Escolha como presentear</h2>
+                        <p class="options-subtitle">Selecione a forma que preferir contribuir</p>
+                    </div>
+                    
+                    <div class="options-grid">
+                        <!-- Opção 1: PIX -->
+                        <div class="option-card option-recommended" id="pixOption">
+                            <div class="option-badge">
+                                <span class="badge-text">Recomendado</span>
+                            </div>
+                            <div class="option-icon">
+                                <i class="fas fa-qrcode"></i>
+                            </div>
+                            <div class="option-content">
+                                <h3>Fazer um PIX</h3>
+                                <p class="option-description">
+                                    Transfira o valor do presente diretamente para os noivos comprarem. 
+                                    É rápido, seguro e sem taxas!
+                                </p>
+                                
+                                <div class="pix-details">
+                                    <div class="pix-qr-code" id="pixQRCode">
+                                        <img src="qrcode.png" alt="QR Code PIX" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+                                    </div>
+                                    
+                                    <div class="pix-info">
+                                        <div class="info-item">
+                                            <span class="info-label">Chave PIX (CPF):</span>
+                                            <div class="info-value">
+                                                <span id="pixKey">123.456.789-00</span>
+                                                <button class="btn-copy" id="copyPixBtn">
+                                                    <i class="fas fa-copy"></i> Copiar
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="info-item">
+                                            <span class="info-label">Valor:</span>
+                                            <span class="info-value" id="pixValue">R$ 0,00</span>
+                                        </div>
+                                        
+                                        <div class="info-item">
+                                            <span class="info-label">Favorecido:</span>
+                                            <span class="info-value">João Gabriel Ribeiro Holanda</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="option-instructions">
+                                    <h4><i class="fas fa-info-circle"></i> Como fazer o PIX:</h4>
+                                    <ol>
+                                        <li>Abra o app do seu banco</li>
+                                        <li>Escolha a opção "Pagar com PIX"</li>
+                                        <li>Escaneie o QR Code ou cole a chave</li>
+                                        <li>Confirme o valor e finalize</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Opção 2: Entrega e Compra Externa -->
+                        <div class="option-card" id="deliveryOption">
+                            <div class="option-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="option-content">
+                                <h3>Entregar no Endereço ou Comprar Online</h3>
+                                <p class="option-description">
+                                    Você pode comprar online e mandar entregar ou usar o link original do produto.
+                                </p>
+                                
+                                <div class="delivery-details">
+                                    <div class="address-card">
+                                        <h4><i class="fas fa-home"></i> Endereço dos Noivos</h4>
+                                        <div class="address-info">
+                                            <p><strong>Rua Quintino Bocaiuva, 414</strong></p>
+                                            <p>Bairro Santa Rosa, Belo Horizonte</p>
+                                            <p>Bloco 2, Apto 301</p>
+                                            <p>CEP: 31255-550</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Link de Compra Externa -->
+                                    <div class="external-purchase">
+                                        <h4><i class="fas fa-external-link-alt"></i> Comprar no Site Original</h4>
+                                        <div class="external-info">
+                                            <div class="info-item">
+                                                <span class="info-label">Produto:</span>
+                                                <span class="info-value" id="externalProductName">Carregando...</span>
+                                            </div>
+                                            
+                                            <div class="info-item">
+                                                <span class="info-label">Preço:</span>
+                                                <span class="info-value" id="externalProductPrice">R$ 0,00</span>
+                                            </div>
+                                            
+                                            <div class="info-item">
+                                                <span class="info-label">Loja:</span>
+                                                <span class="info-value" id="externalStore">Carregando...</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="external-actions">
+                                            <a href="#" target="_blank" class="btn-external" id="externalLinkBtn">
+                                                <i class="fas fa-shopping-cart"></i>
+                                                <span>Comprar Agora no Site</span>
+                                            </a>
+                                            
+                                            <button class="btn-copy" id="copyLinkBtn">
+                                                <i class="fas fa-copy"></i> Copiar Link
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="delivery-instructions">
+                                        <h4><i class="fas fa-shipping-fast"></i> Instruções:</h4>
+                                        <ul>
+                                            <li>Compre o produto em qualquer loja online ou use o link acima</li>
+                                            <li>Use o endereço dos noivos para entrega</li>
+                                            <li>Verifique se a voltagem é <strong>110V</strong> para eletrodomésticos</li>
+                                            <li>Recomendamos usar o nome "João e Maisa"</li>
+                                            <li>Após enviar/comprar, avise-nos pelo WhatsApp</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Confirmation Section -->
+                <section class="confirmation-section">
+                    <div class="confirmation-content">
+                        <div class="confirmation-message">
+                            <h3><i class="fas fa-check-circle"></i> Pronto para confirmar?</h3>
+                            <p>
+                                Após fazer o PIX ou enviar o presente, clique no botão abaixo para nos avisar 
+                                e atualizarmos nossa lista. Isso evita presentes duplicados!
+                            </p>
+                        </div>
+                        
+                        <div class="whatsapp-options">
+                            <h4><i class="fab fa-whatsapp"></i> Avisar pelo WhatsApp</h4>
+                            <p>Escolha para qual número prefere enviar a confirmação:</p>
+                            
+                            <div class="whatsapp-buttons">
+                                <button class="btn-whatsapp whatsapp-joao" id="whatsappJoaoBtn">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>Avisar João</span>
+                                    <small>(31) 98675-0249</small>
+                                </button>
+                                
+                                <button class="btn-whatsapp whatsapp-maisa" id="whatsappMaisaBtn">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>Avisar Maisa</span>
+                                    <small>(31) 99699-7590</small>
+                                </button>
+                         
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h4>João & Maisa</h4>
+                    <p>Construindo nosso lar com amor</p>
+                </div>
+                <div class="footer-contact">
+                    <h5>Dúvidas?</h5>
+                    <p>Entre em contato com os noivos:</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>João: (31) 98675-0249</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>Maisa: (31) 99699-7590</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lista de Presentes - João e Maisa. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Copy Confirmation Toast -->
+    <div class="toast" id="copyToast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span>Chave PIX copiada para a área de transferência!</span>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Presentes - João e Maisa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header / Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="couple-names">João <span class="amp">&</span> Maisa</h1>
+            
+            <div class="welcome-message">
+                <h2>Escolha seu presente especial para o nosso lar!</h2>
+                <div class="message-options">
+                    <div class="message-option" data-message="1">
+                        "Um lar se constrói com amor e se completa com carinho. Ajude-nos a construir o nosso!"
+                    </div>
+                    <div class="message-option" data-message="2">
+                        "Cada presente é um tijolo de afeto na construção do nosso futuro juntos."
+                    </div>
+                    <div class="message-option" data-message="3">
+                        "Compartilhe conosco a alegria de mobiliar nossa vida a dois."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-instructions">
+                <p>Escolha um presente, faça sua contribuição e ajude-nos a construir nosso lar dos sonhos!</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Price Range Navigation -->
+    <section class="price-navigation">
+        <div class="container">
+            <h3 class="section-title">Escolha por faixa de preço</h3>
+            <div class="price-badges">
+                <div class="price-badge" data-range="0-100">Até R$ 100</div>
+                <div class="price-badge" data-range="101-300">R$ 101 - R$ 300</div>
+                <div class="price-badge" data-range="301-500">R$ 301 - R$ 500</div>
+                <div class="price-badge" data-range="501-1000">R$ 501 - R$ 1.000</div>
+                <div class="price-badge" data-range="1001-2000">Acima de R$ 1.000</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <!-- Products Grid -->
+                <section class="products-section">
+                    <div class="products-header">
+                        <h3 class="section-title">Nossa Lista de Presentes</h3>
+                    </div>
+                    
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Products will be loaded dynamically from links.txt -->
+                    </div>
+                    
+                    <div class="products-empty" id="noProductsMessage">
+                        <i class="fas fa-gift"></i>
+                        <p>Nenhum produto encontrado nesta faixa de preço.</p>
+                        <button class="btn-clear-filter" id="clearFilterBtn">Limpar filtro</button>
+                    </div>
+                </section>
+                
+                <!-- Price Filter Sidebar -->
+                <aside class="filter-sidebar">
+                    <div class="filter-header">
+                        <h4><i class="fas fa-filter"></i> Filtrar por Preço</h4>
+                        <p class="filter-info">Escolha apenas uma faixa de preço</p>
+                    </div>
+                    
+                    <div class="filter-options" id="priceFilters">
+                        <div class="filter-option">
+                            <input type="radio" name="priceFilter" id="filterAll" value="all" checked>
+                            <label for="filterAll">Todos os preços</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" name="priceFilter" id="filter0-100" value="0-100">
+                            <label for="filter0-100">Até R$ 100</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" name="priceFilter" id="filter101-300" value="101-300">
+                            <label for="filter101-300">R$ 101 - R$ 300</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" name="priceFilter" id="filter301-500" value="301-500">
+                            <label for="filter301-500">R$ 301 - R$ 500</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" name="priceFilter" id="filter501-1000" value="501-1000">
+                            <label for="filter501-1000">R$ 501 - R$ 1.000</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" name="priceFilter" id="filter1001-2000" value="1001-2000">
+                            <label for="filter1001-2000">Acima de R$ 1.000</label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Total de itens:</span>
+                            <span class="stat-value" id="totalItems">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Filtrados:</span>
+                            <span class="stat-value" id="filteredItems">0</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Voltage Warning Modal -->
+    <div class="modal-overlay" id="voltageModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Atenção Importante</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-icon">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <p class="warning-text">
+                    Caso o presente escolhido seja um equipamento eletrônico ou eletrodoméstico, 
+                    <strong>certifique-se de que a voltagem é 110V</strong>!
+                </p>
+                <p class="modal-info">
+                    Nossa residência funciona com voltagem 110V. Verifique esta informação antes de prosseguir.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+                <button class="btn btn-primary" id="understandBtn">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h4>João & Maisa</h4>
+                    <p>Construindo nosso lar com amor</p>
+                </div>
+                <div class="footer-contact">
+                    <h5>Dúvidas?</h5>
+                    <p>Entre em contato com os noivos:</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>João: (31) 98675-0249</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>Maisa: (31) 99699-7590</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lista de Presentes - João e Maisa. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
