@@ -7,8 +7,18 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Italiana&family=Allura&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Italiana&family=Allura&family=Tangerine:wght@400;700&family=Alice&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Fonte Citadel Script local -->
+    <style>
+        @font-face {
+            font-family: 'Citadel Script';
+            src: url('citadel-script-std.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
 </head>
 <body>
     <!-- Header / Hero Section -->
@@ -26,17 +36,27 @@
             <p class="wedding-date">Construindo nosso lar juntos</p>
             
             <div class="welcome-message">
-                <h2>Escolha seu presente especial para o nosso lar!</h2>
-                <div class="message-options">
-                    <div class="message-option" data-message="1">
-                        "Um lar se constrói com amor e se completa com carinho. Ajude-nos a construir o nosso!"
-                    </div>
-                    <div class="message-option" data-message="2">
-                        "Cada presente é um tijolo de afeto na construção do nosso futuro juntos."
-                    </div>
-                    <div class="message-option" data-message="3">
-                        "Compartilhe conosco a alegria de mobiliar nossa vida a dois."
-                    </div>
+                <h2>Preparamos esta lista com muito carinho para quem quiser e puder nos ajudar na construção do nosso novo lar e dessa nova etapa da nossa vida juntos.<br>Selecionamos itens de diferentes valores e, para facilitar, deixamos também o link de cada produto para vocês. Mas não se sintam, de forma alguma, obrigados a escolher um presente da lista.<br>Caso prefiram comprar outra coisa ou nos presentear através de Pix, deixaremos nossas respectivas chaves abaixo.<br>Independentemente da forma, saibam que receberemos tudo com muito carinho e gratidão. Ter vocês conosco celebrando esse momento já é, para nós, um presente enorme! </h2>
+                
+                <!-- Botões PIX -->
+                <div class="pix-container">
+                    <button class="pix-button pix-maisa" onclick="copyPixKey('31996997590', 'Maisa')">
+                        <i class="fas fa-money-bill-transfer"></i>
+                        <div class="pix-content">
+                            <span class="pix-label">Chave PIX Maisa</span>
+                            <span class="pix-key">31996997590</span>
+                        </div>
+                        <i class="fas fa-copy pix-copy-icon"></i>
+                    </button>
+                    
+                    <button class="pix-button pix-joao" onclick="copyPixKey('14604110646', 'João')">
+                        <i class="fas fa-money-bill-transfer"></i>
+                        <div class="pix-content">
+                            <span class="pix-label">Chave PIX João</span>
+                            <span class="pix-key">14604110646</span>
+                        </div>
+                        <i class="fas fa-copy pix-copy-icon"></i>
+                    </button>
                 </div>
             </div>
         </div>

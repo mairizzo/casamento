@@ -7,6 +7,9 @@ let selectedPriceRange = 'all';
 // Mapeamento de imagens da pasta imagens_unidas (carregado do arquivo imagens_links.json)
 let imageLinksMap = {};
 
+// Lista de produtos já comprados
+let produtosComprados = {};
+
 // Carrega o mapeamento de imagens do arquivo imagens_links.json
 async function loadImageLinks() {
     try {
@@ -17,6 +20,19 @@ async function loadImageLinks() {
         console.error('Erro ao carregar mapeamento de imagens:', error);
         // Fallback: cria um mapeamento vazio
         imageLinksMap = {};
+    }
+}
+
+// Carrega a lista de produtos comprados
+async function loadProdutosComprados() {
+    try {
+        const response = await fetch('produtos_comprados.json');
+        produtosComprados = await response.json();
+        console.log('✅ Produtos comprados carregados:', produtosComprados);
+        console.log('Total de produtos comprados:', Object.keys(produtosComprados).length);
+    } catch (error) {
+        console.error('❌ Erro ao carregar produtos comprados:', error);
+        produtosComprados = {};
     }
 }
 
@@ -194,6 +210,9 @@ async function loadProducts() {
         // Primeiro carrega o mapeamento de imagens
         await loadImageLinks();
         
+        // Carrega produtos comprados
+        await loadProdutosComprados();
+        
         const response = await fetch('links.txt');
         const text = await response.text();
         const lines = text.trim().split('\n');
@@ -329,30 +348,54 @@ function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'product-card';
     
+    // DEBUG: Mostrar nome do produto no console
+    console.log('Produto carregado:', product.name);
+    
+    // Verificar se o produto já foi comprado
+    const isComprado = produtosComprados[product.name] === true;
+    console.log('Produto', product.name, 'comprado?', isComprado);
+    
+    if (isComprado) {
+        card.classList.add('produto-comprado');
+    }
+    
     // Determinar ícone baseado no tipo de produto
     const iconClass = product.isElectroElectronic ? 'fas fa-plug' : 'fas fa-gift';
     
+    // Overlay de produto adquirido
+    const overlayComprado = isComprado ? `
+        <div class="produto-adquirido-overlay">
+            <div class="check-verde">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <span class="texto-adquirido">Presente recebido</span>
+        </div>
+    ` : '';
+    
     card.innerHTML = `
-<div class="product-image" style="background-image: url('${encodeURI(product.image)}')">
+        <div class="product-image" style="background-image: url('${encodeURI(product.image)}')">
             <i class="${iconClass}"></i>
+            ${overlayComprado}
         </div>
         <div class="product-info">
             <h4 class="product-name">${product.name}</h4>
             <div class="product-price">${product.originalPrice}</div>
             <div class="product-actions">
-                <button class="btn-presentear" data-product='${JSON.stringify(product)}'>
-                    <i class="fas fa-gift"></i> Presentear
+                <button class="btn-presentear" data-product='${JSON.stringify(product)}' ${isComprado ? 'disabled' : ''}>
+                    <i class="fas fa-gift"></i> ${isComprado ? 'Já Presenteado' : 'Presentear'}
                 </button>
-                <a href="${product.url}" target="_blank" class="btn-comprar-externo">
+                <a href="${product.url}" target="_blank" class="btn-comprar-externo" ${isComprado ? 'style="pointer-events: none; opacity: 0.5;"' : ''}>
                     <i class="fas fa-external-link-alt"></i> Ver produto
                 </a>
             </div>
         </div>
     `;
     
-    // Adicionar evento ao botão Presentear
-    const giftButton = card.querySelector('.btn-presentear');
-    giftButton.addEventListener('click', () => handleGiftClick(product));
+    // Adicionar evento ao botão Presentear (somente se não foi comprado)
+    if (!isComprado) {
+        const giftButton = card.querySelector('.btn-presentear');
+        giftButton.addEventListener('click', () => handleGiftClick(product));
+    }
     
     return card;
 }
@@ -483,3 +526,46 @@ document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
     initializeEvents();
 });
+
+
+// Função para copiar chave PIX
+function copyPixKey(key, name) {
+    // Criar elemento temporário para copiar
+    const tempInput = document.createElement('input');
+    tempInput.value = key;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    
+    try {
+        document.execCommand('copy');
+        // Mostrar feedback visual
+        showPixCopyFeedback(name);
+    } catch (err) {
+        console.error('Erro ao copiar:', err);
+        alert('Não foi possível copiar. Chave PIX ' + name + ': ' + key);
+    }
+    
+    document.body.removeChild(tempInput);
+}
+
+// Mostrar feedback de cópia
+function showPixCopyFeedback(name) {
+    // Criar elemento de feedback
+    const feedback = document.createElement('div');
+    feedback.className = 'pix-copy-feedback';
+    feedback.innerHTML = `<i class="fas fa-check-circle"></i> Chave PIX de ${name} copiada!`;
+    document.body.appendChild(feedback);
+    
+    // Animar entrada
+    setTimeout(() => {
+        feedback.classList.add('show');
+    }, 10);
+    
+    // Remover após 3 segundos
+    setTimeout(() => {
+        feedback.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(feedback);
+        }, 300);
+    }, 3000);
+}

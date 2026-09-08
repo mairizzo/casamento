@@ -154,12 +154,21 @@ body > * {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 24px;
+    overflow-x: hidden; /* Garante que o container não cause scroll horizontal */
 }
 
 /* Container mais estreito para dar destaque às flores laterais em desktop */
 @media (min-width: 1200px) {
     .main-content .container {
-        max-width: 1100px;
+        max-width: 1000px; /* Reduzido de 1100px para 1000px conforme solicitado */
+    }
+    
+    .main-content::before {
+        left: -60px; /* Ajuste para ficar melhor com container menor */
+    }
+    
+    .main-content::after {
+        right: -60px; /* Ajuste para ficar melhor com container menor */
     }
 }
 
@@ -223,8 +232,8 @@ body > * {
 .hero-content::after {
     content: '';
     position: absolute;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     background-image: url('vecteezy_a-white-lily-on-a-white-background_69209041-removebg-preview.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -235,14 +244,14 @@ body > * {
 }
 
 .hero-content::before {
-    top: -50px;
-    left: -100px;
+    top: -40px;
+    left: -80px;
     transform: rotate(-15deg);
 }
 
 .hero-content::after {
-    top: -50px;
-    right: -100px;
+    top: -40px;
+    right: -80px;
     transform: rotate(15deg) scaleX(-1);
 }
 
@@ -308,7 +317,7 @@ body > * {
 
 /* Tipografia elegante para os nomes */
 .couple-names {
-    font-family: 'Allura', 'Tangerine', 'Great Vibes', cursive;
+    font-family: 'Citadel Script', 'Allura', 'Tangerine', 'Great Vibes', cursive;
     font-size: 7rem;
     font-weight: 400;
     letter-spacing: 2px;
@@ -341,11 +350,11 @@ body > * {
 }
 
 .couple-names .amp {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Citadel Script', 'Allura', 'Tangerine', cursive;
     color: var(--gold);
-    font-size: 4rem;
-    font-weight: 300;
-    font-style: italic;
+    font-size: 5rem;
+    font-weight: 400;
+    font-style: normal;
     display: inline-block;
     animation: pulse 3s ease infinite;
     text-shadow: 0 0 20px rgba(201, 169, 110, 0.5);
@@ -378,13 +387,13 @@ body > * {
 }
 
 .welcome-message h2 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Alice', 'Georgia', serif;
     font-size: 1.85rem;
     font-weight: 400;
     margin-bottom: 40px;
     opacity: 0.95;
-    line-height: 1.6;
-    font-style: italic;
+    line-height: 1.8;
+    font-style: normal;
 }
 
 .message-options {
@@ -393,6 +402,150 @@ body > * {
     gap: 16px;
     justify-content: center;
     margin-bottom: 32px;
+}
+
+/* ============================================
+   BOTÕES PIX - Design Moderno e Funcional
+   ============================================ */
+.pix-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+    animation: fadeInUp 1s ease 0.8s both;
+}
+
+.pix-button {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 32px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    min-width: 280px;
+}
+
+.pix-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.pix-button:hover::before {
+    left: 100%;
+}
+
+.pix-button:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.9);
+}
+
+.pix-button:active {
+    transform: translateY(-2px) scale(1.01);
+}
+
+.pix-button .fa-money-bill-transfer {
+    font-size: 2rem;
+    color: var(--primary-color);
+    animation: pulse 2s ease infinite;
+}
+
+.pix-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.pix-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-darker);
+}
+
+.pix-key {
+    font-family: 'Poppins', monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: 0.5px;
+}
+
+.pix-copy-icon {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.pix-button:hover .pix-copy-icon {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Feedback de cópia */
+.pix-copy-feedback {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pix-copy-feedback.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.pix-copy-feedback i {
+    font-size: 1.5rem;
+}
+
+/* Responsividade dos botões PIX */
+@media (max-width: 768px) {
+    .pix-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .pix-button {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .pix-copy-feedback {
+        right: 10px;
+        left: 10px;
+        top: 10px;
+        text-align: center;
+        justify-content: center;
+    }
 }
 
 .message-option {
@@ -449,6 +602,7 @@ body > * {
     padding: 48px 0;
     animation: fadeIn 1s ease 0.3s both;
     position: relative;
+    overflow-x: hidden; /* Garante que não haja scroll horizontal */
 }
 
 /* Ornamentos botânicos nas laterais - lírios SUPER VISÍVEIS */
@@ -456,8 +610,8 @@ body > * {
 .main-content::after {
     content: '';
     position: absolute;
-    width: 250px;
-    height: 250px;
+    width: 180px;
+    height: 180px;
     background-image: url('vecteezy_a-white-lily-on-a-white-background_69209041-removebg-preview.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -469,15 +623,26 @@ body > * {
 }
 
 .main-content::before {
-    top: 20px;
-    left: -40px;
-    transform: rotate(-20deg);
+    top: 40px;
+    left: -80px;
+    transform: rotate(-12deg);
 }
 
 .main-content::after {
-    top: 20px;
-    right: -40px;
-    transform: rotate(20deg) scaleX(-1);
+    top: 40px;
+    right: -80px;
+    transform: rotate(12deg) scaleX(-1);
+}
+
+/* Ajuste para desktop */
+@media (min-width: 1200px) {
+    .main-content::before {
+        left: -70px;
+    }
+    
+    .main-content::after {
+        right: -70px;
+    }
 }
 
 .content-wrapper {
@@ -530,7 +695,7 @@ body > * {
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 28px;
     margin-bottom: 48px;
 }
@@ -1162,7 +1327,8 @@ body > * {
     }
     
     .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
     }
     
     .couple-names {
@@ -1188,35 +1354,37 @@ body > * {
     /* Ajustar lírios no hero para mobile - bem visíveis */
     .hero-content::before,
     .hero-content::after {
-        width: 130px;
-        height: 130px;
+        width: 120px;
+        height: 120px;
         opacity: 0.5;
     }
     
     .hero-content::before {
-        left: -50px;
-        top: -30px;
+        left: -40px;
+        top: -20px;
     }
     
     .hero-content::after {
-        right: -50px;
-        top: -30px;
+        right: -40px;
+        top: -20px;
     }
     
     /* Ajustar lírios laterais para mobile */
     .main-content::before,
     .main-content::after {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
         opacity: 0.45;
     }
     
     .main-content::before {
-        left: -30px;
+        left: -20px;
+        top: 20px;
     }
     
     .main-content::after {
-        right: -30px;
+        right: -20px;
+        top: 20px;
     }
     
     .decorative-line {
@@ -1236,7 +1404,7 @@ body > * {
     }
     
     .couple-names .amp {
-        font-size: 3rem;
+        font-size: 2.8rem;
         margin: 10px 0;
     }
     
@@ -1245,7 +1413,8 @@ body > * {
     }
     
     .welcome-message h2 {
-        font-size: 1.5rem;
+        font-size: 1.35rem;
+        line-height: 1.7;
     }
     
     .message-options {
@@ -1258,7 +1427,8 @@ body > * {
     }
     
     .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
     
     .products-header .section-title {
@@ -1290,7 +1460,7 @@ body > * {
     }
     
     .couple-names .amp {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     
     .wedding-date {
@@ -1300,6 +1470,11 @@ body > * {
     .wedding-date::before,
     .wedding-date::after {
         margin: 0 10px;
+    }
+    
+    .welcome-message h2 {
+        font-size: 1.15rem;
+        line-height: 1.65;
     }
     
     .products-grid {
@@ -1323,4 +1498,96 @@ body > * {
     .filter-sidebar {
         padding: 20px;
     }
+}
+
+
+/* ============================================
+   PRODUTOS JÁ COMPRADOS - Overlay com Check Verde
+   ============================================ */
+.produto-comprado {
+    position: relative;
+}
+
+.produto-adquirido-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(16, 185, 129, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 10;
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.check-verde {
+    width: 100px;
+    height: 100px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    animation: scaleIn 0.5s ease;
+}
+
+.check-verde i {
+    font-size: 4.5rem;
+    color: var(--success);
+}
+
+.texto-adquirido {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Botões desabilitados para produtos comprados */
+.produto-comprado .btn-presentear {
+    background: linear-gradient(135deg, var(--gray-300) 0%, var(--gray-400) 100%);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.produto-comprado .btn-presentear:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+}
+
+/* Preço riscado para produtos comprados */
+.produto-comprado .product-price {
+    text-decoration: line-through;
+    opacity: 0.5;
+    position: relative;
+}
+
+.produto-comprado .product-price::after {
+    content: 'Presente recebido 🎉';
+    position: absolute;
+    bottom: -24px;
+    left: 0;
+    right: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--success);
+    text-decoration: none;
+    letter-spacing: 1px;
 }
