@@ -76,7 +76,10 @@ function findImageForUrl(url) {
         // Máquina de lavar Brastemp - mapeia URLs diferentes para a mesma imagem
         'https://www.brastemp.com.br/maquina-de-lavar-brastemp-16kg-cinza-platinum-bwf16a9/': 'Máquina de Lavar Brastemp 16Kg Cinza Platinum com Ciclo Tira Manchas Advanced e Smart Sensor - BWF16A9.webp',
         'www.brastemp.com.br/maquina-de-lavar-brastemp-16kg-cinza-platinum-bwf16a9': 'Máquina de Lavar Brastemp 16Kg Cinza Platinum com Ciclo Tira Manchas Advanced e Smart Sensor - BWF16A9.webp',
-        'brastemp.com.br/maquina-de-lavar-brastemp-16kg-cinza-platinum-bwf16a9': 'Máquina de Lavar Brastemp 16Kg Cinza Platinum com Ciclo Tira Manchas Advanced e Smart Sensor - BWF16A9.webp'
+        'brastemp.com.br/maquina-de-lavar-brastemp-16kg-cinza-platinum-bwf16a9': 'Máquina de Lavar Brastemp 16Kg Cinza Platinum com Ciclo Tira Manchas Advanced e Smart Sensor - BWF16A9.webp',
+        // Aparelho de jantar - URL contém "sala-de-jantar" mas produto é aparelho de jantar
+        'aparelho-de-jantar-bio-campestre-floral': 'Aparelho de Jantar Bio Campestre Floral.webp',
+        'sala-de-jantar/aparelho': 'Aparelho de Jantar Bio Campestre Floral.webp'
     };
     
     // Verifica mapeamentos especiais

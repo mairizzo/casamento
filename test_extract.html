@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Extract Names</title>
+</head>
+<body>
+    <h1>Teste de Extração de Nomes</h1>
+    <pre id="output"></pre>
+    
+    <script>
+        function extractProductName(url) {
+            const urlObj = new URL(url);
+            const pathname = urlObj.pathname.toLowerCase();
+            
+            let name = pathname.split('/')
+                .filter(part => part && !part.match(/^\d/))
+                .join('-')
+                .replace(/-p-/, '-')
+                .replace(/-\d+$/, '')
+                .replace(/mlb-\d+/gi, '')
+                .replace(/[^a-z0-9-]/g, '')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '');
+            
+            return name || 'produto';
+        }
+        
+        const urls = [
+            "https://www.riachuelo.com.br/produto/manta-fleece-de-microfibra-smoke-casa-riachuelo-15078698_sku_sku_queen_preto",
+            "https://www.mercadolivre.com.br/escorredor-de-silicone-macarrao-alimento-retratil-borracha/up/MLBU3796784893",
+            "https://www.mercadolivre.com.br/escorredor-de-louca-inoxidavel-2-andares-drenagem-automatica-bandeja-grande-360o-organizador-pia-com-porta-pratos-tigelas-talheres-copos/p/MLB75829923",
+            "https://www.mercadolivre.com.br/balanca-digital-10kg-aco-inox-para-cozinha-dieta-pesar/up/MLBU4790177298",
+            "https://www.amazon.com.br/Kit-60-Prendedores-Roupa-Pl%C3%A1stico/dp/B0H95JNT57",
+            "https://www.mercadolivre.com.br/kit-10-potes-hermeticos-alimentos-480-1000-2200ml-paramount/p/MLB23666833",
+            "https://www.mercadolivre.com.br/electrolux-kit-12-potes-hermeticos-de-plastico-retangulares/p/MLB23191928",
+            "https://www.mercadolivre.com.br/faqueiro-dourado-kit-24-pcs-luxo-com-maleta-premium--complet/up/MLBU3244916895",
+            "https://www.riachuelo.com.br/edredom-casal-microfibra-dupla-face-liso-bege-casa-riachuelo-15999335001_sku_sku",
+        ];
+        
+        let output = '';
+        urls.forEach(url => {
+            const raw = extractProductName(url);
+            const display = raw.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            output += `"${display}": true,\n`;
+        });
+        
+        document.getElementById('output').textContent = output;
+    </script>
+</body>
+</html>
